@@ -1,0 +1,38 @@
+[
+  {
+    "bookingID": 1,
+    "customerID": 2,
+    "vehicleID": 4,
+    "startDate": "15/11/2025",
+    "endDate": "20/11/2025",
+    "totalAmount": 4500000,
+    "status": "Confirmed"
+  },
+  {
+    "bookingID": 2,
+    "customerID": 3,
+    "vehicleID": 1,
+    "startDate": "10/11/2025",
+    "endDate": "12/11/2025",
+    "totalAmount": 1000000,
+    "status": "Cancelled"
+  },
+  {
+    "bookingID": 3,
+    "customerID": 7,
+    "vehicleID": 1,
+    "startDate": "20/11/2025",
+    "endDate": "20/11/2029",
+    "totalAmount": 730500000,
+    "status": "Cancelled"
+  },
+  {
+    "bookingID": 4,
+    "customerID": 7,
+    "vehicleID": 2,
+    "startDate": "20/11/2025",
+    "endDate": "20/11/2035",
+    "totalAmount": 2008600000,
+    "status": "Cancelled"
+  }
+]

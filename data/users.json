@@ -1,0 +1,39 @@
+[
+  {
+    "userID": 1,
+    "name": "Admin System",
+    "email": "admin@rental.com",
+    "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+    "role": "Admin"
+  },
+  {
+    "userID": 2,
+    "name": "Nguyen Van A",
+    "email": "vana@gmail.com",
+    "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "phoneNumber": "0901234567",
+    "bookingHistory": [],
+    "status": "Active",
+    "role": "Customer"
+  },
+  {
+    "userID": 3,
+    "name": "Tran Thi B",
+    "email": "thib@gmail.com",
+    "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "phoneNumber": "0912345678",
+    "bookingHistory": [],
+    "status": "Active",
+    "role": "Customer"
+  },
+  {
+    "userID": 4,
+    "name": "Le Van C",
+    "email": "vanc@gmail.com",
+    "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "phoneNumber": "0923456789",
+    "bookingHistory": [],
+    "status": "Locked",
+    "role": "Customer"
+  }
+]

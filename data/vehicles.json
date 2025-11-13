@@ -1,0 +1,42 @@
+[
+  {
+    "vehicleID": 1,
+    "license_plate": "51A-12345",
+    "brand": "Toyota",
+    "model": "Vios",
+    "pricePerDay": 500000,
+    "status": "available"
+  },
+  {
+    "vehicleID": 2,
+    "license_plate": "51B-67890",
+    "brand": "Honda",
+    "model": "City",
+    "pricePerDay": 550000,
+    "status": "available"
+  },
+  {
+    "vehicleID": 3,
+    "license_plate": "51C-11111",
+    "brand": "Mazda",
+    "model": "CX-5",
+    "pricePerDay": 800000,
+    "status": "available"
+  },
+  {
+    "vehicleID": 4,
+    "license_plate": "51D-22222",
+    "brand": "Ford",
+    "model": "Ranger",
+    "pricePerDay": 900000,
+    "status": "rented"
+  },
+  {
+    "vehicleID": 5,
+    "license_plate": "51E-33333",
+    "brand": "Hyundai",
+    "model": "Accent",
+    "pricePerDay": 450000,
+    "status": "maintenance"
+  }
+]
