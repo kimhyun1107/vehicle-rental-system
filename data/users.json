@@ -6,16 +6,17 @@
     "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
     "role": "Admin"
   },
-  {
-    "userID": 2,
-    "name": "Nguyen Van A",
-    "email": "vana@gmail.com",
-    "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-    "phoneNumber": "0901234567",
+ {
+    "userID": 5,
+    "name": "Customer",
+    "email": "customer@gmail.com",
+    "password": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+    "phoneNumber": "0", 
     "bookingHistory": [],
     "status": "Active",
     "role": "Customer"
-  },
+},
+
   {
     "userID": 3,
     "name": "Tran Thi B",
