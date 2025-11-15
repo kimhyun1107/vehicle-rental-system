@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 GIỚI THIỆU
+**I. GIỚI THIỆU**
 
 Hệ thống quản lý thuê xe (Vehicle Rental System) là ứng dụng console Python giúp:
 - **Khách hàng**: Đăng ký, đăng nhập, xem xe, thuê xe, quản lý booking
@@ -15,26 +15,26 @@ Hệ thống quản lý thuê xe (Vehicle Rental System) là ứng dụng consol
 ## ⚡ TÍNH NĂNG
 
 ### Chức năng Customer:
-- ✅ Đăng ký tài khoản
-- ✅ Đăng nhập/Đăng xuất
-- ✅ Xem danh sách xe
-- ✅ Xem chi tiết xe
-- ✅ Thuê xe (bao gồm thanh toán)
-- ✅ Xem lịch sử đặt xe
-- ✅ Hủy booking
+- Đăng ký tài khoản
+- Đăng nhập/Đăng xuất
+- Xem danh sách xe
+- Xem chi tiết xe
+- Thuê xe (bao gồm thanh toán)
+- Xem lịch sử đặt xe
+- Hủy booking
 
 ### Chức năng Admin:
-- ✅ Quản lý xe (Thêm/Sửa/Xóa/Xem)
-- ✅ Quản lý người dùng (Khóa/Mở khóa)
-- ✅ Xem tất cả booking
+-  Quản lý xe (Thêm/Sửa/Xóa/Xem)
+-  Quản lý người dùng (Khóa/Mở khóa)
+- Xem tất cả booking
 
 ---
 
 ## 🛠️ CÔNG NGHỆ
 
-- **Python 3.10+**
-- **JSON** (lưu trữ dữ liệu)
-- **Docker** (deployment)
+- **Python**
+- **JSON** 
+- **Docker** 
 
 ---
 
@@ -67,10 +67,10 @@ ProgAndTest_Group15/
 
 ### Phương pháp 1: Chạy trực tiếp
 ```bash
-# Di chuyển đến thư mục dự án
+
 cd ProgAndTest_Group15
 
-# Chạy ứng dụng
+
 python src/main.py
 ```
 
@@ -91,32 +91,11 @@ docker run -it -v $(pwd)/data:/app/data vehicle-rental-system
 ## 📖 TÀI KHOẢN TEST
 
 **Admin:**
-- Email: `admin@rental.com`
-- Password: `admin`
+- Email: admin@rental.com
+- Password: admin
 
 **Customer:**
-- Email: `vana@gmail.com`
-- Password: `password`
+- Email: customer@gmail.com
+- Password: customer
 
----
 
-## 👥 PHÂN CÔNG CÔNG VIỆC
-
-| Thành viên | Nhiệm vụ |
-|-----------|----------|
-| Thành viên 1 | `main.py`, `admin_ops.py`, Dockerfile, README |
-| Thành viên 2 | `models.py`, `data_manager.py`, `utils.py` |
-| Thành viên 3 | `auth.py`, `booking_ops.py` |
-| Thành viên 4 | `customer_ops.py`, Test Cases, Sample Data |
-
----
-
-## 📞 LIÊN HỆ
-
-**Nhóm 15 - Công Nghệ Phần Mềm**
-
-📧 Email: group15@example.com
-
----
-
-*Cảm ơn đã sử dụng hệ thống!* 🙏
