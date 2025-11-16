@@ -1,18 +1,18 @@
-Project Python mô phỏng hệ thống thuê xe.
-Cách chạy:
-Cách 1 : python scr/main.py
-Cách 2 : Đối với người đã cài docker desktop
--Mở terminal của ProgAndTest_Group15
--Dùng lệnh : docker build -t vehicle-rental-system
-docker run -it vehicle_rental_system
-Thư mục chính
-- src/: Source code
-- data/: File JSON
-Công nghệ sử dụng
+ Vehicle Rental System
+How to run:
+Option 1: python src/main.py
+Option 2: For users who have Docker Desktop installed
+Open the terminal in the ProgAndTest_Group15 folder
+Run the commands:
+docker build -t vehicle-rental-system .
+docker run -it vehicle-rental-system
+Main directories:
+src/: Source code
+data/: JSON files
+Technologies used:
 VSCode
 Excel
-Ngôn ngữ lập trình Python
+Programming language: Python
 JSON
-Github
+GitHub
 Docker
-
