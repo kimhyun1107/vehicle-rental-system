@@ -1,13 +1,44 @@
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.sqlite3
-*.xlsx
-*.csv
-*.log
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment (QUAN TRỌNG!)
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# IDE
 .vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation files
+*.docx
+*.xlsx
+Testing Document.xlsx
+File containing evidence of tool usage and task assignment.docx
+
+# Git
 .git/
 .gitignore
-.DS_Store
-.env
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/

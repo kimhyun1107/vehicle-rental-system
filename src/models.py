@@ -1,4 +1,3 @@
-# src/models.py
 from dataclasses import dataclass, field
 from typing import List
 
@@ -33,21 +32,27 @@ class Admin(User):
 
 @dataclass
 class Vehicle:
-    vehicleID: int 
-    license_plate: str 
-    brand: str 
-    model: str 
-    pricePerDay: float 
+    vehicleID: int
+    license_plate: str
+    brand: str
+    model: str
+    pricePerDay: float
     status: str
-    
+
     def getDetails(self) -> str:
-        return f"  ID: {self.vehicleID}\n  Biển số: {self.license_plate}\n  Tên: {self.brand} {self.model}\n  Giá: {self.pricePerDay:,.0f} VND/ngày\n  Trạng thái: {self.status}"
+        return (
+            f"  ID: {self.vehicleID}\n"
+            f"  License Plate: {self.license_plate}\n"
+            f"  Name: {self.brand} {self.model}\n"
+            f"  Price: {self.pricePerDay:,.0f} VND/day\n"
+            f"  Status: {self.status}"
+        )
 
 @dataclass
 class Booking:
     bookingID: int
-    customerID: int 
-    vehicleID: int 
+    customerID: int
+    vehicleID: int
     startDate: str
     endDate: str
     totalAmount: float
@@ -56,7 +61,7 @@ class Booking:
 @dataclass
 class Payment:
     paymentID: int
-    bookingID: int 
+    bookingID: int
     paymentDate: str
     amount: float
     status: str

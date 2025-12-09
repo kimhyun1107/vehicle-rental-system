@@ -1,0 +1,5 @@
+# Minimal dependencies for Vehicle Rental System
+
+
+# Optional: 
+colorama==0.4.6

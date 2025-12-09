@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  vehicle-rental-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vehicle-rental-system:latest
+    container_name: vehicle-rental-console
+    
+    # Interactive mode
+    stdin_open: true
+    tty: true
+    
+    # Mount data directory
+    volumes:
+      - ./data:/app/data
+    
+    # Environment variables
+    environment:
+      - ENVIRONMENT=production
+      - TZ=Asia/Ho_Chi_Minh
+    
+    # Restart policy
+    restart: unless-stopped

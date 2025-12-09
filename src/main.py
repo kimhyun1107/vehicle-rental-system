@@ -1,5 +1,3 @@
-# src/main.py
-
 from typing import Optional, Union
 from models import Customer, Admin
 import auth
@@ -10,35 +8,33 @@ from utils import clear_screen, pause
 
 
 def main_menu() -> Optional[Union[Customer, Admin]]:
-    """Hiển thị Main Menu (Đơn giản hóa)"""
-    print("--- HỆ THỐNG THUÊ XE (VEHICLE RENTAL SYSTEM) ---")
-    print("1. Đăng nhập")
-    print("2. Đăng ký")
-    print("0. Thoát") 
-    choice = input("Nhập lựa chọn của bạn: ").strip()
+    print(" VEHICLE RENTAL SYSTEM ")
+    print("1. Login")
+    print("2. Register")
+    print("0. Exit")
+    choice = input("Enter your choice: ").strip()
     
     if choice == '1':
-        return auth.login() 
+        return auth.login()
     elif choice == '2':
-        auth.register() 
+        auth.register()
         return None
     elif choice == '0':
-        print("Cảm ơn đã sử dụng hệ thống!")
+        print("Thank you for using the system!")
         exit(0)
     else:
-        print("[LỖI] Lựa chọn không hợp lệ.")
+        print("Invalid choice.")
         return None
 
 
 def customer_menu(customer: Customer) -> None:
-    """Hiển thị Customer Menu (Gộp nhóm chức năng)"""
     while True:
         clear_screen()
-        print(f"--- MENU KHÁCH HÀNG (Xin chào, {customer.name}) ---")
-        print("1. Xem danh sách & Thuê xe") 
-        print("2. Xem lịch sử & Hủy booking") 
-        print("0. Đăng xuất")
-        choice = input("Nhập lựa chọn của bạn: ").strip()
+        print(f"--- CUSTOMER MENU (Welcome, {customer.name}) ---")
+        print("1. View vehicle list & Rent a vehicle")
+        print("2. View booking history & Cancel booking")
+        print("0. Logout")
+        choice = input("Enter your choice: ").strip()
 
         if choice == '1':
             clear_screen()
@@ -46,7 +42,7 @@ def customer_menu(customer: Customer) -> None:
             if vehicles:
                 vehicle_to_rent = customer_ops.view_vehicle_details(vehicles)
                 if vehicle_to_rent:
-                    confirm = input("\nBạn có muốn thuê xe này? (Y/N): ").strip().upper()
+                    confirm = input("\nDo you want to rent this vehicle? (Y/N): ").strip().upper()
                     if confirm == 'Y':
                         booking_ops.rent_vehicle(customer, vehicle_to_rent)
             pause()
@@ -55,29 +51,28 @@ def customer_menu(customer: Customer) -> None:
             clear_screen()
             bookings = customer_ops.view_booking_history(customer)
             if bookings:
-                confirm = input("\nBạn có muốn hủy booking nào không? (Y/N): ").strip().upper()
+                confirm = input("\nWould you like to cancel any booking? (Y/N): ").strip().upper()
                 if confirm == 'Y':
                     booking_ops.cancel_booking(customer, bookings)
             pause()
             
         elif choice == '0':
-            print("Đã đăng xuất.")
+            print("Logged out.")
             break
         else:
-            print("[LỖI] Lựa chọn không hợp lệ.")
+            print("[ERROR] Invalid choice.")
             pause()
 
 
 def admin_menu(admin: Admin) -> None:
-    """Hiển thị Admin Menu"""
     while True:
         clear_screen()
-        print(f"--- MENU ADMIN (Xin chào, {admin.name}) ---")
-        print("1. Quản lý xe") 
-        print("2. Quản lý người dùng") 
-        print("3. Xem tất cả booking") 
-        print("0. Đăng xuất") 
-        choice = input("Nhập lựa chọn của bạn: ").strip()
+        print(f"--- ADMIN MENU (Welcome, {admin.name}) ---")
+        print("1. Manage vehicles")
+        print("2. Manage users")
+        print("3. View all bookings")
+        print("0. Logout")
+        choice = input("Enter your choice: ").strip()
 
         if choice == '1':
             clear_screen()
@@ -92,15 +87,14 @@ def admin_menu(admin: Admin) -> None:
             admin_ops.view_all_bookings()
             pause()
         elif choice == '0':
-            print("Đã đăng xuất.")
+            print("Logged out.")
             break
         else:
-            print("[LỖI] Lựa chọn không hợp lệ.")
+            print("[ERROR] Invalid choice.")
             pause()
 
 
 def main():
-    """Luồng chạy chính của ứng dụng"""
     current_user: Optional[Union[Customer, Admin]] = None
     
     while True:
@@ -110,11 +104,11 @@ def main():
             pause()
         elif current_user.role == 'Customer':
             customer_menu(customer=current_user)
-            current_user = None 
+            current_user = None
             pause()
         elif current_user.role == 'Admin':
             admin_menu(admin=current_user)
-            current_user = None 
+            current_user = None
             pause()
 
 

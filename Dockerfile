@@ -1,15 +1,46 @@
-# Sử dụng Python base image nhẹ
-FROM python:3.10-slim
+# Multi-stage build để tối ưu image size
+FROM python:3.11-slim as builder
 
-# Thiết lập thư mục làm việc trong container
+# Metadata
+LABEL maintainer="your-email@example.com"
+LABEL description="Vehicle Rental System - Containerized Python Application"
+
 WORKDIR /app
 
-# Copy toàn bộ project vào container
-COPY . .
+# Copy only requirements first (leverage Docker cache)
+COPY requirements-minimal.txt .
 
-# (Tùy chọn) Nếu có requirements.txt, cài đặt các dependency
-# Nếu chưa có, bạn có thể tạo thủ công hoặc bỏ qua dòng này
-RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi
+# Install dependencies
+RUN pip install --no-cache-dir --user -r requirements-minimal.txt
 
-# Chạy chương trình chính
+# Final stage
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PATH=/root/.local/bin:$PATH
+
+# Create non-root user for security
+RUN useradd -m -u 1000 appuser && \
+    mkdir -p /app/data && \
+    chown -R appuser:appuser /app
+
+WORKDIR /app
+
+# Copy Python dependencies from builder stage
+COPY --from=builder /root/.local /root/.local
+
+# Copy application code
+COPY --chown=appuser:appuser src/ ./src/
+COPY --chown=appuser:appuser data/ ./data/
+
+# Switch to non-root user
+USER appuser
+
+# Health check (optional for console app)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python -c "import sys; sys.exit(0)" || exit 1
+
+# Run the application
 CMD ["python", "src/main.py"]

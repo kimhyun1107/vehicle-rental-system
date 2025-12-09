@@ -1,12 +1,9 @@
-# src/data_manager.py
-
 import json
 import os
 from typing import List, Dict, Any
 from dataclasses import asdict
 
 
-# Đường dẫn file dữ liệu
 DATA_DIR = "data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 VEHICLES_FILE = os.path.join(DATA_DIR, "vehicles.json")
@@ -15,13 +12,11 @@ PAYMENTS_FILE = os.path.join(DATA_DIR, "payments.json")
 
 
 def init_data_files() -> None:
-    """Khởi tạo các file dữ liệu nếu chưa tồn tại"""
+    """Initialize data files if they do not exist."""
     
-    # Tạo thư mục data nếu chưa có
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
     
-    # Khởi tạo các file JSON rỗng
     for file_path in [USERS_FILE, VEHICLES_FILE, BOOKINGS_FILE, PAYMENTS_FILE]:
         if not os.path.exists(file_path):
             with open(file_path, 'w', encoding='utf-8') as f:
@@ -29,7 +24,7 @@ def init_data_files() -> None:
 
 
 def load_data(file_path: str) -> List[Dict[str, Any]]:
-    """Đọc dữ liệu từ file JSON"""
+    """Read data from JSON file."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -38,18 +33,18 @@ def load_data(file_path: str) -> List[Dict[str, Any]]:
 
 
 def save_data(file_path: str, data: List[Dict[str, Any]]) -> None:
-    """Lưu dữ liệu vào file JSON"""
+    """Save data to JSON file."""
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 def serialize(obj: Any) -> Dict[str, Any]:
-    """Chuyển đối tượng thành dictionary để lưu JSON"""
+    """Convert an object into dictionary for JSON storage."""
     return asdict(obj)
 
 
 def deserialize_user(data: Dict[str, Any]):
-    """Chuyển dictionary thành đối tượng User (Customer/Admin)"""
+    """Convert dictionary into User (Customer/Admin) object."""
     from models import Customer, Admin
     
     if data['role'] == 'Customer':
@@ -74,7 +69,7 @@ def deserialize_user(data: Dict[str, Any]):
 
 
 def deserialize_vehicle(data: Dict[str, Any]):
-    """Chuyển dictionary thành đối tượng Vehicle"""
+    """Convert dictionary into Vehicle object."""
     from models import Vehicle
     
     return Vehicle(
@@ -88,7 +83,7 @@ def deserialize_vehicle(data: Dict[str, Any]):
 
 
 def deserialize_booking(data: Dict[str, Any]):
-    """Chuyển dictionary thành đối tượng Booking"""
+    """Convert dictionary into Booking object."""
     from models import Booking
     
     return Booking(
@@ -103,7 +98,7 @@ def deserialize_booking(data: Dict[str, Any]):
 
 
 def deserialize_payment(data: Dict[str, Any]):
-    """Chuyển dictionary thành đối tượng Payment"""
+    """Convert dictionary into Payment object."""
     from models import Payment
     
     return Payment(
@@ -116,5 +111,4 @@ def deserialize_payment(data: Dict[str, Any]):
     )
 
 
-# Khởi tạo file khi import module
 init_data_files()

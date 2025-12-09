@@ -6,17 +6,16 @@
     "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
     "role": "Admin"
   },
- {
+  {
     "userID": 5,
     "name": "Customer",
     "email": "customer@gmail.com",
     "password": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
-    "phoneNumber": "0", 
+    "phoneNumber": "0",
     "bookingHistory": [],
     "status": "Active",
     "role": "Customer"
-},
-
+  },
   {
     "userID": 3,
     "name": "Tran Thi B",
@@ -36,5 +35,35 @@
     "bookingHistory": [],
     "status": "Locked",
     "role": "Customer"
+  },
+  {
+    "userID": 6,
+    "name": "",
+    "email": "0",
+    "password": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "role": "Customer",
+    "phoneNumber": "0",
+    "bookingHistory": [],
+    "status": "Active"
+  },
+  {
+    "userID": 7,
+    "name": "Nguyen Van G",
+    "email": "nvg@gmail.com",
+    "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "role": "Customer",
+    "phoneNumber": "0901234568",
+    "bookingHistory": [],
+    "status": "Active"
+  },
+  {
+    "userID": 8,
+    "name": "khachhang@gmail.com",
+    "email": "khachhang@gmail.com",
+    "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "role": "Customer",
+    "phoneNumber": "123456",
+    "bookingHistory": [],
+    "status": "Active"
   }
 ]

@@ -1,20 +1,17 @@
-# src/admin_ops.py
-
 from models import Vehicle, Customer
 import data_manager as dm
 from utils import get_next_id
 
 
 def manage_vehicles(admin_id: int):
-    """Menu chính cho UC Manage Vehicles."""
     while True:
-        print("\n--- QUẢN LÝ XE ---")
-        print("1. Thêm xe mới")
-        print("2. Sửa thông tin xe")
-        print("3. Xóa xe")
-        print("4. Xem tất cả xe")
-        print("0. Quay lại menu Admin")
-        choice = input("Nhập lựa chọn của bạn: ").strip()
+        print("\n--- VEHICLE MANAGEMENT ---")
+        print("1. Add new vehicle")
+        print("2. Edit vehicle information")
+        print("3. Delete vehicle")
+        print("4. View all vehicles")
+        print("0. Back to Admin menu")
+        choice = input("Enter your choice: ").strip()
 
         if choice == '1':
             _add_vehicle(admin_id)
@@ -27,26 +24,25 @@ def manage_vehicles(admin_id: int):
         elif choice == '0':
             break
         else:
-            print("[LỖI] Lựa chọn không hợp lệ.")
+            print("[ERROR] Invalid choice.")
 
 
 def _add_vehicle(admin_id: int):
-    """Hàm con để Thêm xe"""
-    print("--- Thêm xe mới ---")
-    brand = input("Nhập hãng xe: ").strip()
-    model = input("Nhập mẫu xe: ").strip()
-    license_plate = input("Nhập biển số xe: ").strip()
+    print("--- Add new vehicle ---")
+    brand = input("Enter vehicle brand: ").strip()
+    model = input("Enter vehicle model: ").strip()
+    license_plate = input("Enter license plate: ").strip()
     try:
-        price_per_day = float(input("Nhập giá thuê/ngày: "))
+        price_per_day = float(input("Enter rental price/day: "))
     except ValueError:
-        print("[LỖI] Giá phải là một con số.")
+        print("[ERROR] Price must be a number.")
         return
 
     vehicles_data = dm.load_data(dm.VEHICLES_FILE)
     
     for v in vehicles_data:
         if v['license_plate'] == license_plate:
-            print("[LỖI] Biển số xe này đã tồn tại trong hệ thống.")
+            print("[ERROR] This license plate already exists in the system.")
             return
             
     next_id = get_next_id(vehicles_data, 'vehicleID')
@@ -61,26 +57,25 @@ def _add_vehicle(admin_id: int):
     
     vehicles_data.append(dm.serialize(new_vehicle))
     dm.save_data(dm.VEHICLES_FILE, vehicles_data)
-    print(f"Đã thêm xe '{brand} {model}' thành công.")
+    print(f"Vehicle '{brand} {model}' added successfully.")
 
 
 def _edit_vehicle():
-    """Hàm con để Sửa xe"""
     _view_all_vehicles() 
     try:
-        vehicle_id = int(input("Nhập ID xe bạn muốn sửa: "))
+        vehicle_id = int(input("Enter the ID of the vehicle you want to edit: "))
     except ValueError:
-        print("[LỖI] ID phải là số.")
+        print("[ERROR] ID must be a number.")
         return
         
     vehicles_data = dm.load_data(dm.VEHICLES_FILE)
     vehicle_found = False
     for v_data in vehicles_data:
         if v_data['vehicleID'] == vehicle_id:
-            print(f"Đang sửa xe: {v_data['brand']} {v_data['model']}")
+            print(f"Editing vehicle: {v_data['brand']} {v_data['model']}")
             try:
-                new_price = input(f"Giá mới (hiện tại {v_data['pricePerDay']}, nhấn Enter để bỏ qua): ").strip()
-                new_status = input(f"Trạng thái mới (hiện tại '{v_data['status']}', nhấn Enter để bỏ qua): ").strip()
+                new_price = input(f"New price (current {v_data['pricePerDay']}, press Enter to skip): ").strip()
+                new_status = input(f"New status (current '{v_data['status']}', press Enter to skip): ").strip()
                 
                 if new_price:
                     v_data['pricePerDay'] = float(new_price)
@@ -90,23 +85,22 @@ def _edit_vehicle():
                 vehicle_found = True
                 break
             except ValueError:
-                print("[LỖI] Giá nhập không hợp lệ.")
+                print("[ERROR] Invalid price.")
                 return
 
     if vehicle_found:
         dm.save_data(dm.VEHICLES_FILE, vehicles_data)
-        print("Cập nhật xe thành công.")
+        print("Vehicle updated successfully.")
     else:
-        print("[LỖI] Không tìm thấy xe với ID này.")
+        print("[ERROR] No vehicle found with this ID.")
 
 
 def _delete_vehicle():
-    """Hàm con để Xóa xe"""
     _view_all_vehicles() 
     try:
-        vehicle_id = int(input("Nhập ID xe bạn muốn XÓA: "))
+        vehicle_id = int(input("Enter the ID of the vehicle you want to DELETE: "))
     except ValueError:
-        print("[LỖI] ID phải là số.")
+        print("[ERROR] ID must be a number.")
         return
         
     vehicles_data = dm.load_data(dm.VEHICLES_FILE)
@@ -117,48 +111,46 @@ def _delete_vehicle():
             break
     
     if vehicle_to_delete:
-        confirm = input(f"Bạn có chắc muốn XÓA xe {vehicle_to_delete['brand']} {vehicle_to_delete['model']}? (Y/N): ").strip().upper()
+        confirm = input(f"Are you sure you want to DELETE vehicle {vehicle_to_delete['brand']} {vehicle_to_delete['model']}? (Y/N): ").strip().upper()
         if confirm == 'Y':
             vehicles_data.remove(vehicle_to_delete)
             dm.save_data(dm.VEHICLES_FILE, vehicles_data)
-            print("Đã xóa xe thành công.")
+            print("Vehicle deleted successfully.")
         else:
-            print("Đã hủy thao tác xóa.")
+            print("Delete action canceled.")
     else:
-        print("[LỖI] Không tìm thấy xe với ID này.")
+        print("[ERROR] No vehicle found with this ID.")
 
 
 def _view_all_vehicles():
-    """Hàm con để Xem tất cả xe"""
-    print("--- Toàn bộ xe trong hệ thống ---")
+    print("--- All vehicles in the system ---")
     vehicles_data = dm.load_data(dm.VEHICLES_FILE)
     if not vehicles_data:
-        print("Chưa có xe nào trong hệ thống.")
+        print("No vehicles in the system.")
         return
     for v_data in vehicles_data:
         v = dm.deserialize_vehicle(v_data)
-        print(f"  [ID: {v.vehicleID}] {v.brand} {v.model} ({v.license_plate}) - Trạng thái: {v.status}")
+        print(f"  [ID: {v.vehicleID}] {v.brand} {v.model} ({v.license_plate}) - Status: {v.status}")
 
 
 def manage_users():
-    """Triển khai Use Case Manage Users."""
-    print("\n--- QUẢN LÝ NGƯỜI DÙNG (CUSTOMER) ---")
+    print("\n--- USER MANAGEMENT (CUSTOMER) ---")
     
     users_data = dm.load_data(dm.USERS_FILE)
     customers = [dm.deserialize_user(u) for u in users_data if u['role'] == 'Customer']
     
     if not customers:
-        print("Chưa có tài khoản Customer nào.")
+        print("No Customer accounts found.")
         return
         
-    print("Danh sách Customer:")
+    print("Customer list:")
     for c in customers:
-        print(f"  [ID: {c.userID}] {c.name} ({c.email}) - Trạng thái: {c.status}")
+        print(f"  [ID: {c.userID}] {c.name} ({c.email}) - Status: {c.status}")
         
     try:
-        user_id = int(input("Nhập ID Customer bạn muốn thay đổi trạng thái: "))
+        user_id = int(input("Enter the Customer ID you want to change status: "))
     except ValueError:
-        print("[LỖI] ID phải là số.")
+        print("[ERROR] ID must be a number.")
         return
         
     user_found = False
@@ -167,41 +159,40 @@ def manage_users():
             current_status = u_data['status']
             new_status = 'Locked' if current_status == 'Active' else 'Active'
             
-            confirm = input(f"Bạn có chắc muốn đổi trạng thái của {u_data['name']} từ '{current_status}' sang '{new_status}'? (Y/N): ").strip().upper()
+            confirm = input(f"Are you sure you want to change status of {u_data['name']} from '{current_status}' to '{new_status}'? (Y/N): ").strip().upper()
             if confirm == 'Y':
                 u_data['status'] = new_status
                 dm.save_data(dm.USERS_FILE, users_data)
-                print(f"Đã cập nhật trạng thái tài khoản {u_data['name']} thành '{new_status}'.")
+                print(f"Account status of {u_data['name']} updated to '{new_status}'.")
             else:
-                print("Đã hủy thao tác.")
+                print("Action canceled.")
             user_found = True
             break
             
     if not user_found:
-        print("[LỖI] Không tìm thấy Customer với ID này.")
+        print("[ERROR] No Customer found with this ID.")
 
 
 def view_all_bookings():
-    """Triển khai chức năng 'View All Bookings' cho Admin."""
-    print("--- TẤT CẢ BOOKING TRONG HỆ THỐNG ---")
+    print("--- ALL BOOKINGS IN THE SYSTEM ---")
     
     all_bookings_data = dm.load_data(dm.BOOKINGS_FILE)
     if not all_bookings_data:
-        print("Chưa có booking nào trong hệ thống.")
+        print("No bookings found in the system.")
         return
 
     users_data = {u['userID']: u['name'] for u in dm.load_data(dm.USERS_FILE)}
     vehicles_data = {v['vehicleID']: f"{v['brand']} {v['model']}" for v in dm.load_data(dm.VEHICLES_FILE)}
 
-    print(f"Tìm thấy tổng cộng {len(all_bookings_data)} booking:")
+    print(f"Found a total of {len(all_bookings_data)} bookings:")
     for b_data in all_bookings_data:
         b = dm.deserialize_booking(b_data)
         
-        customer_name = users_data.get(b.customerID, "Không rõ")
-        vehicle_name = vehicles_data.get(b.vehicleID, "Không rõ")
+        customer_name = users_data.get(b.customerID, "Unknown")
+        vehicle_name = vehicles_data.get(b.vehicleID, "Unknown")
 
         print("-" * 20)
         print(f"  Booking ID: {b.bookingID}")
-        print(f"  Khách hàng: {customer_name} (ID: {b.customerID})")
-        print(f"  Xe: {vehicle_name} (ID: {b.vehicleID})")
-        print(f"  Trạng thái: {b.status}")
+        print(f"  Customer: {customer_name} (ID: {b.customerID})")
+        print(f"  Vehicle: {vehicle_name} (ID: {b.vehicleID})")
+        print(f"  Status: {b.status}")
