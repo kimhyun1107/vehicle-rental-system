@@ -5,7 +5,7 @@ How to run:
 Option 1: python src/main.py
 Option 2: For users who have Docker Desktop installed
 
-Open the terminal in the ProgAndTest_Group15 folder
+
 
 Run the commands:
 
